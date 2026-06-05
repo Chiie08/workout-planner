@@ -1,0 +1,21 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Workout {
+  id        Int      @id @default(autoincrement())
+  name      String
+  workoutDate DateTime
+  bodyPart  String
+  exercise  String
+  weight    Int
+  reps      Int
+  sets      Int
+  createdAt DateTime @default(now())
+}
