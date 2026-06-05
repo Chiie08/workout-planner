@@ -50,6 +50,8 @@ app.post("/delete", async (req, res) => {
   res.redirect("/");
 });
 
-app.listen(3000, () => {
-  console.log("Server Start");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server Start on ${PORT}`);
 });
