@@ -24,7 +24,6 @@ html
 
         button.btn.btn-outline-secondary.rounded-circle(type="button" onclick="setLightMode()")
           i.bi.bi-brightness-high
-
       .text-center.mb-5
         img(
           src="/images/fitness-workout-healthy.png"
@@ -37,20 +36,19 @@ html
         )
           | Workout Planner
 
-        p.lead.text-muted.mt-3
-          | トレーニング内容を記録し、
+        p#description.mt-3(
+          style="font-size:1.2rem;font-weight:500;"
+        )
+          | トレーニング内容を記録し、自分の成長を管理するためのアプリ
           br
-          | 自分の成長を管理するためのアプリ
-
-        p(style="color:#9b5de5;")
           | Created by Chie Kakizawa
 
-        h4.mt-4.text-primary
+        h4.mt-4(style="color:#9b5de5;")
           | 総トレーニング数：
           = totalWorkouts
-
       .card.shadow-lg.border-0.mb-4(style="border-radius:20px;")
         .card-body
+
           form(method="post" action="/create")
 
             .mb-3
@@ -91,10 +89,12 @@ html
               | 登録
 
       each workout in workouts
-        .card.shadow-sm.mb-3
+
+        .card.shadow-sm.mb-3.workout-card
+
           .card-body
 
-            h4.card-title.text-primary
+            h4.card-title(style="color:#ff9ecf;")
               = workout.name
 
             p.mb-1
@@ -127,38 +127,44 @@ html
 
                 button.btn.btn-danger(type="submit")
                   i.bi.bi-trash
-                  |  削除
+                  | 削除
 
-script.
-  function setDarkMode() {
-    document.body.style.background = "#121212";
-    document.body.style.color = "#f8f9fa";
+      script.
+        function setDarkMode() {
+          document.body.style.background = "#121212";
+          document.body.style.color = "#ffc0cb";
+          document.getElementById("description").style.color = "#ffe4ec";
 
-    document.querySelectorAll(".card").forEach(card => {
-      card.style.backgroundColor = "#1e1e1e";
-      card.style.color = "#f8f9fa";
-    });
+          const cards = document.querySelectorAll(".workout-card");
 
-    localStorage.setItem("theme", "dark");
-  }
+          cards.forEach(function(card) {
+            card.style.backgroundColor = "#1e1e1e";
+            card.style.color = "#ffc0cb";
+          });
 
-  function setLightMode() {
-    document.body.style.background =
-      "linear-gradient(to right, #fff0f5, #ffe4ec)";
-    document.body.style.color = "black";
+          localStorage.setItem("theme", "dark");
+        }
 
-    document.querySelectorAll(".card").forEach(card => {
-      card.style.backgroundColor = "white";
-      card.style.color = "black";
-    });
+        function setLightMode() {
+          document.body.style.background =
+            "linear-gradient(to right, #fff0f5, #ffe4ec)";
+          document.body.style.color = "black";
+          document.getElementById("description").style.color = "#d63384";
 
-    localStorage.setItem("theme", "light");
-  }
+          const cards = document.querySelectorAll(".workout-card");
 
-  window.onload = function () {
-    const theme = localStorage.getItem("theme");
+          cards.forEach(function(card) {
+            card.style.backgroundColor = "white";
+            card.style.color = "black";
+          });
 
-    if (theme === "dark") {
-      setDarkMode();
-    }
-  };
+          localStorage.setItem("theme", "light");
+        }
+
+        window.onload = function () {
+          const theme = localStorage.getItem("theme");
+
+          if (theme === "dark") {
+            setDarkMode();
+          }
+        };
