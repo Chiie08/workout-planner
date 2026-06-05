@@ -1,6 +1,5 @@
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -9,13 +8,13 @@ datasource db {
 }
 
 model Workout {
-  id        Int      @id @default(autoincrement())
-  name      String
+  id          Int      @id @default(autoincrement())
+  name        String
   workoutDate DateTime
-  bodyPart  String
-  exercise  String
-  weight    Int
-  reps      Int
-  sets      Int
-  createdAt DateTime @default(now())
+  bodyPart    String
+  exercise    String
+  weight      Int
+  reps        Int
+  sets        Int
+  createdAt   DateTime @default(now())
 }
